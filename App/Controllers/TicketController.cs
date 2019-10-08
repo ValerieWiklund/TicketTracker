@@ -27,7 +27,23 @@ namespace TicketTracker.Controllers
 
           break;
         case "view":
-          Console.WriteLine("View details of ticket");
+          Console.WriteLine("Which Ticket?");
+          string input = Console.ReadLine();
+          if (int.TryParse(input, out int index))
+          {
+            _ts.GetTickets(index - 1);
+            Display();
+            Console.WriteLine("Enter close to remove ticket or any other key to go back");
+            string input2 = Console.ReadLine();
+            if (input2 == "close")
+            {
+              _ts.DeleteTicket(index - 1);
+            }
+            else
+            {
+              GetUserInput();
+            }
+          }
           break;
 
       }
@@ -35,6 +51,7 @@ namespace TicketTracker.Controllers
 
     private void Display()
     {
+      Console.Clear();
       foreach (string m in _ts.Messages)
       {
         Console.WriteLine(m);

@@ -21,11 +21,31 @@ namespace TicketTracker.Services
       Messages.Add("What would you like to do? (view / new / quit)");
     }
 
+    public void GetTickets(int index)
+    {
+      if (index < Tickets.Count && index > -1)
+      {
+        Ticket ticket = Tickets[index];
+        Messages.Add(ticket.GetTemplate());
+      }
+      else
+      {
+        Messages.Add("Invalid Ticket Number");
+      }
+    }
+
+
+
+
     public void CreateTickets(string infoName, string infoDescription)
     {
       Tickets.Add(new Ticket(infoName, infoDescription));
     }
 
+    public void DeleteTicket(int index)
+    {
+      Tickets.RemoveAt(index);
+    }
 
 
 
